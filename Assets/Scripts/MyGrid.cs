@@ -18,13 +18,8 @@ public class MyGrid
         this.GenerateMap();
     }
 
-    public int GetWidth() {
-        return width;
-    }
-
-    public int GetHeight() {
-        return height;
-    }
+    public int GetWidth() => width;
+    public int GetHeight() => height;
 
     public void GenerateMap() {
         for(int x = 0; x < this.GetWidth(); x++) {
