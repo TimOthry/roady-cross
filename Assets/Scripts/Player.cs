@@ -9,7 +9,7 @@ public class Player
     private GameObject playerObject;
     
     public Player() {
-        currentWidth = 4;
+        currentWidth = 7;
         currentHeight = 0;
         prefab = Resources.Load<GameObject>("Prefabs/chicken");
         playerObject = Object.Instantiate(prefab, new Vector3(currentWidth * 1.6f, 0.3f, currentHeight * 1.6f), Quaternion.identity);
