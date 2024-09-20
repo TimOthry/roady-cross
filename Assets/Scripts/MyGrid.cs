@@ -27,6 +27,7 @@ public class MyGrid
         for(int z = 0; z < this.GetHeight(); z++) {
             for (int x = 0; x < this.GetWidth(); x++) {
                 prefab = Resources.Load<GameObject>($"Prefabs/{row[chunk[z] - 1]}");
+                gridArray[z,x] = chunk[z];
                 if (chunk[z] == 2) {
                     Object.Instantiate(prefab, new Vector3(x * 1.6f + 0.8f, 0, z * 1.6f + 0.8f), Quaternion.identity);
                     x++;
