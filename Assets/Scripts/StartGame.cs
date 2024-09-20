@@ -7,7 +7,7 @@ public class StartGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        new MyGrid(15, 20);
+        new MyGrid(20, 16);
         new Player();
     }
 }
