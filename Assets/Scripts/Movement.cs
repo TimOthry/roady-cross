@@ -6,7 +6,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private bool isMoving;
-    private Vector3 origPos, targetPos;
+    private Vector3 origPos, targetPos, playerOrigPos, playerTargerPos;
     private float timeToMove = 0.1f;
 
     void Update() {
@@ -35,15 +35,19 @@ public class Movement : MonoBehaviour
         float elapsedTime = 0;
         origPos = transform.position;
         targetPos = origPos + direction;
+        playerOrigPos = transform.Find("default").position;
+        playerTargerPos = playerOrigPos + new Vector3(0 , 0.5f, 0) + direction;
 
         // Allows coroutine to run in the next frame
         while(elapsedTime < timeToMove) {
             transform.position = Vector3.Lerp(origPos, targetPos, elapsedTime / timeToMove);
+            transform.Find("default").position = Vector3.Lerp(playerOrigPos, playerTargerPos, elapsedTime / timeToMove);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         transform.position = targetPos;
+        transform.Find("default").position = playerTargerPos;
         
         isMoving = false;
     }

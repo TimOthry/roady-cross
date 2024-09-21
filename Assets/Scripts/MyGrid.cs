@@ -91,14 +91,14 @@ public class MyGrid
         }
     }
 
-    // NOTE = The game has 14 wide visible map
-
-    // Function for creating green bit
-    // Function for creating road
-    // Function for creating river
-    // Function for creating trains
-
-    // NOTE: Lilypads, logs, trains, cars, the chicken will be instantiated some where else
-
+    // Add collision logic
+    // Add cars, trains and logs
+    // Add death and point system
     // if log make the velocity of the chicken the same
+    // done with the basic game
+
+    // Implement better camera
+    // Traffic light
+    // Lilypads
+    // Sound effects
 }
