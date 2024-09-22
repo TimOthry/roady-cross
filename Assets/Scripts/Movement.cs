@@ -8,8 +8,8 @@ public class Movement : MonoBehaviour
     private bool isMoving;
     private Vector3 origPos, targetPos, playerOrigPos, playerTargerPos;
     private float timeToMove = 0.1f;
-    private float dist = 1.6f; // Adjust this to match your grid size
-    private LayerMask obstacleLayer; // Layer for obstacles
+    private float dist = 1.6f; //Adjust this to match your grid size
+    public LayerMask obstacleLayer; //Layer for obstacles
 
     void Update() {
         // Prevents multiple coroutines to occur at the same time
