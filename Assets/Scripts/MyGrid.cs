@@ -7,7 +7,6 @@ public class MyGrid
     // Instantiate basic variables
     private int height;
     private int width;
-    private int[,] gridArray;
     private GameObject prefab;
     
     // Constructor
@@ -33,14 +32,39 @@ public class MyGrid
                     Object.Instantiate(prefab, new Vector3(x * 1.6f, 0, z * 1.6f), Quaternion.identity);
                     placeObstacle(chunk[z],x, z);
                 }
+
+                if (x == this.GetWidth() - 1 && chunk[z] != 1) {
+                    InstantiateSpawners(x, z, chunk);
+                }
             }
             if (chunk[z] == 2) {
-                    z++;
+                z++;
             }
         }
     }
 
+    // Instantiates object spawner
+    private void InstantiateSpawners(int x, int z, int[] chunk) {
+        float spawnX = Random.Range(0, 2) == 0 ? x * 1.6f + 5f : -5f;
+
+        if (chunk[z] == 2) {
+            prefab = Resources.Load<GameObject>("Prefabs/car-spawner");
+            Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f + 1.6f), Quaternion.identity);
+        } else if (chunk[z] == 3 ) {
+            prefab = Resources.Load<GameObject>("Prefabs/train-spawner");
+        } else if (chunk[z] == 4 ) {
+            prefab = Resources.Load<GameObject>("Prefabs/log-spawner");
+        }
+
+        spawnX = Random.Range(0, 2) == 0 ? x * 1.6f + 5f : -5f;
+        Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f), Quaternion.identity);
+    }
+
     // Generates 15 number string where numbers 1234 represent a terrain
+    // 1: light-grasss
+    // 2: light-road
+    // 3: rail
+    // 4: light-river
     private int[] Generate15Chunk() {
         System.Random random = new System.Random();
         int length = GetHeight(), i = 0;
@@ -58,8 +82,7 @@ public class MyGrid
             } else if (digit == 4) {
                 if (i < length - 1) {
                     numberArray[i] = 4;
-                    numberArray[i + 1] = 4;
-                    i += 2;
+                    i ++;
                 }
             } else {
                 numberArray[i] = digit;
@@ -74,7 +97,7 @@ public class MyGrid
             System.Random random = new System.Random();
             float chance = random.Next(0, 100); 
 
-            // 10% chance to place an obstacle
+            // 35% chance of an obstacle appearing on grass
             if (chance < 5) {
                 prefab = Resources.Load<GameObject>($"Prefabs/rock");
                 Object.Instantiate(prefab, new Vector3(x * 1.6f, 0.2f, z * 1.6f), Quaternion.identity);
@@ -91,7 +114,6 @@ public class MyGrid
         }
     }
 
-    // Add collision logic
     // Add cars, trains and logs
     // Add death and point system
     // if log make the velocity of the chicken the same
