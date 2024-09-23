@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class TrainSpawner : MonoBehaviour
 {
-    public float minSpawnInterval = 1f;    // Minimum time between spawns
-    public float maxSpawnInterval = 3f;    // Maximum time between spawns
-    public float spawnZOffset = 0f;        // Adjust Z position if necessary
-    public Transform spawnPoint;           // Where the object will be spawned
+    public GameObject[] spawnableObjects;
+    private float minSpawnInterval = 5f;    // Minimum time between spawns
+    private float maxSpawnInterval = 8f;    // Maximum time between spawns
+    private float spawnXOffset = 30f;        // Adjust Z position if necessary
 
     // Start is called before the first frame update
     void Start()
     {
-        //  StartCoroutine(SpawnTrain());
+        // Randomly choose an object from the array to spawn
+        GameObject objectToSpawn = spawnableObjects[Random.Range(0, spawnableObjects.Length)];
+        StartCoroutine(SpawnCar(objectToSpawn));
     }
 
-    // private IEnumerator SpawnTrain() {
-        
-    // }
+    private IEnumerator SpawnCar(GameObject objectToSpawn) {
+        while (true) {
+            // Adjust offset based on the spawner's facing direction
+            float offset = (transform.rotation.eulerAngles.y == 180f) ? -spawnXOffset : spawnXOffset;
+
+            // Spawn the object with the calculated offset and rotation
+            GameObject spawnedObject = Instantiate(objectToSpawn, transform.position + new Vector3(offset, 0, 0), transform.rotation);
+
+            // Wait for a random interval before spawning the next object
+            float spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
 }
