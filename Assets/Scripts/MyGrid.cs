@@ -57,7 +57,8 @@ public class MyGrid
         }
 
         spawnX = Random.Range(0, 2) == 0 ? x * 1.6f + 5f : -5f;
-        Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f), Quaternion.identity);
+        Quaternion spawnRotation = spawnX == -5f ? Quaternion.Euler(0, 180f, 0) : Quaternion.identity;
+        Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f), spawnRotation);
     }
 
     // Generates 15 number string where numbers 1234 represent a terrain
