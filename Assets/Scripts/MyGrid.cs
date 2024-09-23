@@ -20,7 +20,7 @@ public class MyGrid
     public int GetWidth() => width;
 
     private void GenerateMap() {
-        int[] chunk = Generate15Chunk();
+        int[] chunk = GenerateChunk();
         string[] row = {"light-grass", "light-road", "rail", "light-river"};
         for(int z = 0; z < this.GetHeight(); z++) {
             for (int x = 0; x < this.GetWidth(); x++) {
@@ -61,12 +61,12 @@ public class MyGrid
         Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f), spawnRotation);
     }
 
-    // Generates 15 number string where numbers 1234 represent a terrain
+    // Generates a number string where numbers 1234 represent a terrain
     // 1: light-grasss
     // 2: light-road
     // 3: rail
     // 4: light-river
-    private int[] Generate15Chunk() {
+    private int[] GenerateChunk() {
         System.Random random = new System.Random();
         int length = GetHeight(), i = 0;
         int[] numberArray = new int[length];
