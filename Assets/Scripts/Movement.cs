@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     private float timeToMove = 0.1f;
     private float dist = 1.6f; //Adjust this to match your grid size
     public LayerMask obstacleLayer; //Layer for obstacles
+    public LayerMask logLayer; // Layer for logs
+    private ObjMovement currentLog = null; // Reference to the ObjMovement script on the log
 
     void Update() {
         // Prevents multiple coroutines to occur at the same time
@@ -37,6 +39,13 @@ public class Movement : MonoBehaviour
                 StartCoroutine(MovePlayer(new Vector3(dist, 0, 0)));
             }
         }
+
+         // If player is on a log, move with the log using its manual speed
+        if (currentLog != null) {
+            // Adjust movement based on the log's direction
+            Vector3 logMovementDirection = currentLog.transform.right; // Assume logs move along their local X-axis
+            transform.position += logMovementDirection * -currentLog.speed * Time.deltaTime;
+        }
     }
 
     private bool CanMove(Vector3 direction) {
@@ -62,15 +71,53 @@ public class Movement : MonoBehaviour
 
         // Allows coroutine to run in the next frame
         while(elapsedTime < timeToMove) {
-            transform.position = Vector3.Lerp(origPos, targetPos, elapsedTime / timeToMove);
-            transform.Find("default").position = Vector3.Lerp(playerOrigPos, playerTargerPos, elapsedTime / timeToMove);
+            float lerpFactor = elapsedTime / timeToMove;
+
+            transform.position = Vector3.Lerp(origPos, targetPos, lerpFactor);
+            transform.Find("default").position = Vector3.Lerp(playerOrigPos, playerTargerPos, lerpFactor);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPos;
-        transform.Find("default").position = playerTargerPos;
+        // Snap position to the nearest 1.6f on x and z axes
+        if (currentLog == null) {
+            transform.position = SnapToGrid(targetPos);
+            transform.Find("default").position = SnapToGrid(playerTargerPos);
+        }
+
+        // Check if player is on a log after moving
+        DetectLogUnderneath();
         
         isMoving = false;
+    }
+
+    private Vector3 SnapToGrid(Vector3 position) {
+        // Round the x and z coordinates to the nearest multiple of 1.6
+        float snappedX = Mathf.Round(position.x / 1.6f) * 1.6f;
+        float snappedZ = Mathf.Round(position.z / 1.6f) * 1.6f;
+        
+        // Return the new position, y remains the same
+        return new Vector3(snappedX, position.y, snappedZ);
+    }
+
+    private void DetectLogUnderneath() {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f, logLayer)) {
+            ObjMovement log = hit.collider.GetComponent<ObjMovement>();
+
+            if (log != null) {
+                SnapLog(log);
+                currentLog = log; // Store the log's ObjMovement reference
+            }
+        } else {
+            currentLog = null; // If no log is detected, set currentLog to null
+        }
+    }
+
+    private void SnapLog(ObjMovement log) {
+        Vector3 logPosition = log.transform.position;
+        Vector3 snappedPosition = new Vector3(logPosition.x, transform.position.y, transform.position.z); // Adjust only X
+        transform.position = snappedPosition;
     }
 }

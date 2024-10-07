@@ -6,7 +6,7 @@ public class TrainSpawner : MonoBehaviour
 {
     public GameObject[] spawnableObjects;
     private float minSpawnInterval = 5f;    // Minimum time between spawns
-    private float maxSpawnInterval = 8f;    // Maximum time between spawns
+    private float maxSpawnInterval = 10f;    // Maximum time between spawns
     private float spawnXOffset = 30f;        // Adjust Z position if necessary
 
     // Start is called before the first frame update
