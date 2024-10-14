@@ -7,37 +7,46 @@ public class MyGrid
     // Instantiate basic variables
     private int height;
     private int width;
+    private int offset;
     private GameObject prefab;
     
     // Constructor
-    public MyGrid(int height, int width) {
+    public MyGrid(int height, int width, int offset) {
         this.height = height;
         this.width = width;
+        this.offset = offset;
+        this.StartArea();
         this.GenerateMap();
     }
 
     public int GetHeight() => height;
     public int GetWidth() => width;
+    public int GetOffset() => offset;
+    public void SetOffset(int addOffset) => this.offset += addOffset;
 
-    private void GenerateMap() {
+    public void StartArea() {
+        prefab = Resources.Load<GameObject>($"Prefabs/start-area");
+        Object.Instantiate(prefab, new Vector3(12.8f, 0, 0), Quaternion.identity);
+    }
+    public void GenerateMap() {
         int[] chunk = GenerateChunk();
         string[] row = {"light-grass", "light-road", "rail", "light-river"};
-        for(int z = 0; z < this.GetHeight(); z++) {
+        for(int z = this.GetOffset(); z < this.GetHeight() + this.GetOffset(); z++) {
             for (int x = 0; x < this.GetWidth(); x++) {
-                prefab = Resources.Load<GameObject>($"Prefabs/{row[chunk[z] - 1]}");
-                if (chunk[z] == 2) {
+                prefab = Resources.Load<GameObject>($"Prefabs/{row[chunk[z - this.GetOffset()] - 1]}");
+                if (chunk[z - this.GetOffset()] == 2) {
                     Object.Instantiate(prefab, new Vector3(x * 1.6f + 0.8f, 0, z * 1.6f + 0.8f), Quaternion.identity);
                     x++;
                 } else {
                     Object.Instantiate(prefab, new Vector3(x * 1.6f, 0, z * 1.6f), Quaternion.identity);
-                    placeObstacle(chunk[z],x, z);
+                    placeObstacle(chunk[z - this.GetOffset()],x, z);
                 }
 
-                if (x == this.GetWidth() - 1 && chunk[z] != 1) {
+                if (x == this.GetWidth() - 1 && chunk[z - this.GetOffset()] != 1) {
                     InstantiateSpawners(x, z, chunk);
                 }
             }
-            if (chunk[z] == 2) {
+            if (chunk[z - this.GetOffset()] == 2) {
                 z++;
             }
         }
@@ -47,12 +56,12 @@ public class MyGrid
     private void InstantiateSpawners(int x, int z, int[] chunk) {
         float spawnX = Random.Range(0, 2) == 0 ? x * 1.6f + 5f : -5f;
 
-        if (chunk[z] == 2) {
+        if (chunk[z - this.GetOffset()] == 2) {
             prefab = Resources.Load<GameObject>("Prefabs/car-spawner");
             Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f + 1.6f), Quaternion.identity);
-        } else if (chunk[z] == 3 ) {
+        } else if (chunk[z - this.GetOffset()] == 3 ) {
             prefab = Resources.Load<GameObject>("Prefabs/train-spawner");
-        } else if (chunk[z] == 4 ) {
+        } else if (chunk[z - this.GetOffset()] == 4 ) {
             prefab = Resources.Load<GameObject>("Prefabs/log-spawner");
         }
 
@@ -115,11 +124,12 @@ public class MyGrid
         }
     }
 
-    // Add cars, trains and logs
     // Add death and point system
-    // if log make the velocity of the chicken the same
+    // Finish world spawn logic (Make a world starting point)
+    // Tweak car, train and log speeds 
     // done with the basic game
 
+    // EXTRA FEATURES
     // Implement better camera
     // Traffic light
     // Lilypads

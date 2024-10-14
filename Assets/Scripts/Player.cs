@@ -18,6 +18,11 @@ public class Player
     public int GetCurrentWidth() => currentWidth;
     public int GetCurrentHeight() => currentHeight;
 
-    public void SetCurrentWidth() => currentWidth+=1;
-    public void SetCurrentHeight() => currentHeight+=1;
+    public void SetCurrentWidth() => currentWidth += 1;
+    public void SetCurrentHeight() => currentHeight += 1;
+
+    // Add this method to expose the player's Z position
+    public float GetPlayerZPosition() {
+        return playerObject.transform.position.z;
+    }
 }
