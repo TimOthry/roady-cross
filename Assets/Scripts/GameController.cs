@@ -22,10 +22,10 @@ public class GameController : MonoBehaviour
     {
         // Continuously monitor player position
         float currentZ = player.GetPlayerZPosition();
+        player.UpdateScore();
 
         // Check if player has moved 10 tiles ahead
         if (currentZ - lastGeneratedZ >= 16f) {
-            Debug.Log(currentZ);
             // Update the last generated Z point
             lastGeneratedZ = Mathf.FloorToInt(currentZ);
 

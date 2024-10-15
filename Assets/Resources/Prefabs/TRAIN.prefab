@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: roady_cross_assets-0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -114,6 +122,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: roady_cross_assets-0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -174,7 +190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
       propertyPath: m_Name
-      value: train
+      value: TRAIN
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -199,6 +219,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
       insertIndex: -1
       addedObject: {fileID: 669314642796610911}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6561474132635138041}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c56437760518a349ac66c050085d330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4805650238447087241}
   m_SourcePrefab: {fileID: 100100000, guid: 5c56437760518a349ac66c050085d330, type: 3}
 --- !u!4 &1413585197738602098 stripped
 Transform:
@@ -250,6 +276,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+--- !u!114 &6561474132635138041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789548168439264456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c91752e522f48e0907311637ecaa22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &4805650238447087241
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789548168439264456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 32, y: 1.5, z: 1.5}
+  m_Center: {x: 4, y: 0.4, z: 0}
 --- !u!1001 &4890713700251055842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +360,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c6cc15f12c5884c4a905ec67694cd1c0, type: 3}
       propertyPath: m_Name
       value: roady_cross_assets-1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c6cc15f12c5884c4a905ec67694cd1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: c6cc15f12c5884c4a905ec67694cd1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -363,6 +430,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c6cc15f12c5884c4a905ec67694cd1c0, type: 3}
       propertyPath: m_Name
       value: roady_cross_assets-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c6cc15f12c5884c4a905ec67694cd1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: c6cc15f12c5884c4a905ec67694cd1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

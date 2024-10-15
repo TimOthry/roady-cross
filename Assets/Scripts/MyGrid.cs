@@ -55,19 +55,30 @@ public class MyGrid
     // Instantiates object spawner
     private void InstantiateSpawners(int x, int z, int[] chunk) {
         float spawnX = Random.Range(0, 2) == 0 ? x * 1.6f + 5f : -5f;
+        float destroyX = spawnX == -5f ? x * 1.6f + 30f : -30f;
+        Quaternion spawnRotation;
 
         if (chunk[z - this.GetOffset()] == 2) {
+            prefab = Resources.Load<GameObject>("Prefabs/DestroyObject");
+            Object.Instantiate(prefab, new Vector3(destroyX, 0, z * 1.6f + 1.6f), Quaternion.identity);
             prefab = Resources.Load<GameObject>("Prefabs/car-spawner");
-            Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f + 1.6f), Quaternion.identity);
+            spawnRotation = spawnX == -5f ? Quaternion.Euler(0, 180f, 0) : Quaternion.identity;
+            Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f + 1.6f), spawnRotation);
         } else if (chunk[z - this.GetOffset()] == 3 ) {
             prefab = Resources.Load<GameObject>("Prefabs/train-spawner");
         } else if (chunk[z - this.GetOffset()] == 4 ) {
             prefab = Resources.Load<GameObject>("Prefabs/log-spawner");
         }
 
+        // Instantiates spawner and adjusts rotation
         spawnX = Random.Range(0, 2) == 0 ? x * 1.6f + 5f : -5f;
-        Quaternion spawnRotation = spawnX == -5f ? Quaternion.Euler(0, 180f, 0) : Quaternion.identity;
+        spawnRotation = spawnX == -5f ? Quaternion.Euler(0, 180f, 0) : Quaternion.identity;
         Object.Instantiate(prefab, new Vector3(spawnX, 0, z * 1.6f), spawnRotation);
+
+        // Instantiate gameobject which destroys
+        destroyX = spawnX == -5f ? x * 1.6f + 30f : -30f;
+        GameObject destroyPrefab = Resources.Load<GameObject>("Prefabs/DestroyObject");
+        Object.Instantiate(destroyPrefab, new Vector3(destroyX, 0, z * 1.6f), Quaternion.identity);
     }
 
     // Generates a number string where numbers 1234 represent a terrain
@@ -125,8 +136,8 @@ public class MyGrid
     }
 
     // Add death and point system
-    // Finish world spawn logic (Make a world starting point)
-    // Tweak car, train and log speeds 
+    // Tweak car, train and log speeds
+    // Add train and car collisions
     // done with the basic game
 
     // EXTRA FEATURES
