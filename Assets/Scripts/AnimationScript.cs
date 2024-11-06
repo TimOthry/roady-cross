@@ -13,7 +13,7 @@ public class AnimationScript : MonoBehaviour
         if(isRotating) {
             return;
         }
-        // When a key is released, the player rotates
+        // When a key is press down, the player rotates
         if (Input.GetKeyDown(KeyCode.W)) {
             StartCoroutine(RotatePlayer(Vector3.zero)); // Forward (no rotation)
         }

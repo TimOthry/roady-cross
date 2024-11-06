@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        map = new MyGrid(20, 32, 3);
+        map = new MyGrid(20, 16, 3);
         player = new Player();
         playerZ = player.GetPlayerZPosition(); // Initial player Z position
         previousZPosition = playerZ; // Initialize previous position

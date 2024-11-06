@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjMovement : MonoBehaviour
 {
+
     public float speed;
 
     // Update is called once per frame
